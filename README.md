@@ -5,7 +5,7 @@ Engineering-oriented:
 * SATisfiablity problem (SAT)
 * Constraint Programming (CP)
 
-* Algorithm in ML/DS.
+* Algorithm in Machine Learning (ML)/ Data Structure (DS)
 
 
 * Associated Models
