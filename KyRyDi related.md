@@ -1,5 +1,4 @@
 
-
 # KyRyDi
 
 > From [2024-EC-A generic algorithm for efficient key recovery in differential attacks – and its associated tool](https://eprint.iacr.org/2024/288)
@@ -18,10 +17,9 @@
 
 
 
-例子：
+例子 (类 GIFT, 下述例子均为该例子)：
 
 <img width="576" height="470" alt="image" src="https://github.com/user-attachments/assets/f8acee08-8124-4867-8335-a6a1712aa5a6" />
-
 
 <img width="416" height="415" alt="image" src="https://github.com/user-attachments/assets/75c91dc4-ac2a-4913-8611-581f5e9f1867" />
 
@@ -29,5 +27,21 @@
 
 假设密钥恢复阶段的 某个 Sbox 必须满足差分转移 $v_{in}\rightarrow v_{out}$. 一个 *solution* 是 一个 tuple $(x,x',S(x),S(x'))$, 其中 $x\oplus x'=v_{in}$, $S(x)\oplus S(x')=v_{out}$. 所以 *input solution* 是使 上述 *solution* 成立的 $(x,x')$, *output solution* 同理.
 
+例子：图中蓝色对应的 solution 包括 $S_{0,1}, S_{0,3}$ 的 solution 和 $S_{2,0}$ 的 solution (左侧 2 bit 截断).
 
+### Method 1. pre-sieving
+
+- principle
+
+通过存储 Sbox 所对应的 input solution, 其对应于明文 $\#pairs=N$ 在此处的空间大小, 对应到 output solution, 会有一部分输入不满足, 从而可以提前筛掉部分 pairs. 过滤后的 $\#pairs'=N'$.
+
+* example
+
+针对上图 $S_{0,0}$, 存储其无密钥加部分的取值, 有密钥加部分的差分, 记为 $((x_3,x'_3),(x_2,x'_2),x_1\oplus x'_1,x_0\oplus x'_0)$ 共 6 bits, 对应于 $N$ 中的 $2^6$, 但实际上能匹配上 output solution 的仅有 $36<2^6=64$ 个, 因此可以产生 $\frac{36}{64}$ 的筛选 (过滤) 效果.
+
+
+
+*但这个筛选如果仅针对单个 Sbox 是没有意义的*. 因为在猜对应位置的密钥之后依然可以进行筛选, 且这对该步骤的复杂度没有影响. 所以需要想办法使其有效, 即 **compensation**:
+
+先对所有输入已知的 Sbox 都进行过滤, 然后再将猜密钥的过程分段处理, 这样复杂度就会基于 $N'<N$, 使得起始的复杂度降低, 从而很可能后续复杂度都有所降低.
 
