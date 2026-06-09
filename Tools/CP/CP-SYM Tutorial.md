@@ -326,3 +326,7 @@ output ["Result: ", show(result), "\n"];
 ```
 
 在迭代中也可使用该临时变量, 但需注意 *临时变量 无法被打印出, 很难 debug.*
+
+
+### 枚举所有解
+`minizinc --all-solutions .\allsolutions.mzn`
