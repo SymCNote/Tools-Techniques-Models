@@ -13,3 +13,4 @@ https://eprint.iacr.org/2024/105.pdf (CANS23) 这篇文章对比了在 SAT、SMT
 
 LP 下界的评估有如 SageMath 的 polyhedron 接口 之类的方法。
 
+### 对 CP：
