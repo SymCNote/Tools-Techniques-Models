@@ -330,3 +330,14 @@ output ["Result: ", show(result), "\n"];
 
 ### 枚举所有解
 `minizinc --all-solutions .\allsolutions.mzn`
+
+```
+x = [0, 1, 0, 1]
+----------
+x = [0, 1, 1, 0]
+----------
+x = [1, 0, 0, 1]
+----------
+x = [1, 0, 1, 0]
+----------
+```
